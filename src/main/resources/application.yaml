@@ -1,0 +1,3 @@
+mitico:
+  templates:
+    activity: classpath:Template.svg

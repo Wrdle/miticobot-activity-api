@@ -1,0 +1,63 @@
+
+plugins {
+	id "org.jetbrains.kotlin.jvm" version "1.7.10"
+	id "org.jetbrains.kotlin.plugin.spring" version "1.7.10"
+	id "org.springframework.boot" version "2.7.2"
+	id "io.spring.dependency-management" version "1.0.12.RELEASE"
+	id "org.springframework.experimental.aot" version "0.12.1"
+	id "org.jetbrains.kotlin.kapt" version "1.7.10"
+	id "io.gitlab.arturbosch.detekt" version "1.21.0"
+}
+
+group = 'com.mattdag'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '17'
+
+repositories {
+	maven { url 'https://repo.spring.io/release' }
+	mavenCentral()
+}
+
+dependencies {
+	implementation "org.xhtmlrenderer:flying-saucer-core:9.1.22"
+	implementation "org.jetbrains.kotlin:kotlin-reflect"
+	implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
+	implementation "org.jetbrains.kotlinx:kotlinx-coroutines-reactor"
+	implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4"
+	implementation 'io.github.microutils:kotlin-logging-jvm:2.1.23'
+
+	implementation 'dev.kord:kord-common:0.8.0-M15'
+	implementation 'dev.kord:kord-core:0.8.0-M15'
+
+	implementation "org.springframework.boot:spring-boot-starter-data-redis-reactive"
+	implementation "org.springframework.boot:spring-boot-starter-web"
+	implementation "com.fasterxml.jackson.module:jackson-module-kotlin"
+	implementation "io.projectreactor.kotlin:reactor-kotlin-extensions"
+
+	testImplementation "io.projectreactor:reactor-test"
+	testImplementation "org.springframework.boot:spring-boot-starter-test"
+
+	kapt 'org.springframework.boot:spring-boot-configuration-processor'
+}
+
+compileKotlin {
+	kotlinOptions {
+		freeCompilerArgs = ['-Xjsr305=strict']
+		jvmTarget = '17'
+	}
+}
+
+compileTestKotlin {
+	kotlinOptions {
+		jvmTarget = sourceCompatibility
+	}
+}
+
+tasks.named('test') {
+	useJUnitPlatform()
+}
+
+tasks.named('bootBuildImage'){
+	builder = 'paketobuildpacks/builder:tiny'
+	environment = ['BP_NATIVE_IMAGE': 'true']
+}
