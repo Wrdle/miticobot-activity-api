@@ -1,5 +1,6 @@
 package com.mattdag.mitico.bot.activity.api.config
 
+import com.mattdag.mitico.bot.activity.api.builders.ActivitySvgBuilder
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
@@ -20,6 +21,8 @@ class TemplatesConfig {
         }
         throw FileSystemException("Failed to read validate activityTemplateResource file")
     }
+
+    fun newActivitySvgBuilder() = ActivitySvgBuilder(activityTemplate())
 
     private fun isValidFile(resource: Resource): Boolean {
         if (!resource.exists()) {
