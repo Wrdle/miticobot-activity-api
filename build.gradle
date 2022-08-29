@@ -19,7 +19,6 @@ repositories {
 }
 
 dependencies {
-	implementation "org.xhtmlrenderer:flying-saucer-core:9.1.22"
 	implementation "org.jetbrains.kotlin:kotlin-reflect"
 	implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
 	implementation "org.jetbrains.kotlinx:kotlinx-coroutines-reactor"
@@ -29,7 +28,6 @@ dependencies {
 	implementation 'dev.kord:kord-common:0.8.0-M15'
 	implementation 'dev.kord:kord-core:0.8.0-M15'
 
-	implementation "org.springframework.boot:spring-boot-starter-data-redis-reactive"
 	implementation "org.springframework.boot:spring-boot-starter-web"
 	implementation "com.fasterxml.jackson.module:jackson-module-kotlin"
 	implementation "io.projectreactor.kotlin:reactor-kotlin-extensions"
